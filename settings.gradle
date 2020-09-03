@@ -1,0 +1,3 @@
+include ':gameUtil'
+include ':app'
+rootProject.name = "flyCow"
