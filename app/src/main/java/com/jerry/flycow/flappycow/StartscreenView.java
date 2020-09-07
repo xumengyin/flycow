@@ -23,7 +23,7 @@ public class StartscreenView extends View{
     private static Bitmap achievements = null;
     private static Bitmap leaderboard = null;
     private static Bitmap speaker = null;
-    private static Bitmap info = null;
+   // private static Bitmap info = null;
     private static Bitmap socket = null;
     
     // Button regions: left, top, right, bottom
@@ -48,7 +48,7 @@ public class StartscreenView extends View{
     private Rect dstSpeaker;
     private Rect srcSpeaker;
     private Rect dstInfo;
-    private Rect srcInfo;
+    //private Rect srcInfo;
     private Rect dstSocket;
     private Rect srcSocket;
     
@@ -80,10 +80,10 @@ public class StartscreenView extends View{
         if(speaker == null) {
             speaker = Util.getBitmapAlpha8(mainActivity, R.drawable.speaker);
         }
-        if(info == null) {
-            info = Util.getBitmapAlpha8(mainActivity, R.drawable.about);
-        }
-        srcInfo = new Rect(0, 0, info.getWidth(), info.getHeight());
+//        if(info == null) {
+//            info = Util.getBitmapAlpha8(mainActivity, R.drawable.about);
+//        }
+     //   srcInfo = new Rect(0, 0, info.getWidth(), info.getHeight());
         if(socket == null) {
             socket = Util.getBitmapAlpha8(mainActivity, R.drawable.socket);
         }
@@ -118,10 +118,10 @@ public class StartscreenView extends View{
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawBitmap(splash, srcSplash, dstSplash, null);
-        canvas.drawBitmap(logInOut, srcLogInOut, dstLogInOut, null);
+        //canvas.drawBitmap(logInOut, srcLogInOut, dstLogInOut, null);
         canvas.drawBitmap(play, srcPlay, dstPlay, null);
         canvas.drawBitmap(speaker, srcSpeaker, dstSpeaker, null);
-        canvas.drawBitmap(info, srcInfo, dstInfo, null);
+       // canvas.drawBitmap(info, srcInfo, dstInfo, null);
         canvas.drawBitmap(socket, srcSocket, dstSocket, null);
         if(online) {
             canvas.drawBitmap(achievements, srcAchievements, dstAchievements, null);
@@ -195,7 +195,7 @@ public class StartscreenView extends View{
                     && (event.getX() < REGION_INFO[2] * getWidth())
                     && (event.getY() > REGION_INFO[1] * getHeight())
                     && (event.getY() < REGION_INFO[3] * getHeight()) ) {
-                mainActivity.startActivity(new Intent("com.quchen.flappycow.About"));
+               // mainActivity.startActivity(new Intent("com.quchen.flappycow.About"));
             } else if(online) {
                 if(    (event.getX() > REGION_ACHIEVEMENT[0] * getWidth())
                         && (event.getX() < REGION_ACHIEVEMENT[2] * getWidth())

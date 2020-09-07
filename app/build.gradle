@@ -24,7 +24,7 @@ android {
 dependencies {
     implementation project(path: ':gameUtil')
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.browser:browser:1.2.0'
+    //implementation 'androidx.browser:browser:1.2.0'
     //implementation 'com.google.android.gms:play-services-ads:18.3.0'
 
 }
