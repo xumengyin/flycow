@@ -14,11 +14,11 @@
     <string name="coins">金币</string>
     <string name="medaille_image" translatable="false">Medaillenimage</string>
     <string name="mute_button">静音</string>
-<!--    <string name="developer"></string>-->
-<!--    <string name="graphics"></string>-->
-<!--    <string name="consulting">Consulting: repat</string>-->
-<!--    <string name="license">License: MIT</string>-->
-<!--    <string name="nyan_cat">Nyan Cat was drawn by Christopher Torres and もももも remixed the music by daniwell</string>-->
+    <string name="developer"></string>
+    <string name="graphics"></string>
+    <string name="consulting">Consulting: repat</string>
+    <string name="license">License: MIT</string>
+    <string name="nyan_cat">Nyan Cat was drawn by Christopher Torres and もももも remixed the music by daniwell</string>
     <string name="source_code"></string>
     <string name="onscreen_score_text">得分:</string>
     <string name="onscreen_coin_text">金币:</string>

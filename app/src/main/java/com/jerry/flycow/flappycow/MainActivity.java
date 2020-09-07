@@ -9,13 +9,17 @@ package com.jerry.flycow.flappycow;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.example.games.basegameutils.BaseGameActivity;
+import com.jerry.flycow.R;
+import com.miui.zeus.mimo.sdk.BannerAd;
 
 public class MainActivity extends BaseGameActivity
 {
-    
+    private static final String TAG = "xuxu";
     /** Name of the SharedPreference that saves the medals */
     public static final String medaille_save = "medaille_save";
     
@@ -28,15 +32,65 @@ public class MainActivity extends BaseGameActivity
     public static float volume = DEFAULT_VOLUME;
     
     private StartscreenView view;
+    private ViewGroup ads;
 
+    BannerAd mBannerAd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        view = new StartscreenView(this);
-        setContentView(view);
+        //view = new StartscreenView(this);
+        setContentView(R.layout.home);
+        view=findViewById(R.id.start);
+        ads=findViewById(R.id.ads);
         setSocket();
+        fetchAds();
     }
 
+    private void fetchAds()
+    {
+        if (mBannerAd != null) {
+            mBannerAd.destroy();
+        }
+        mBannerAd = new BannerAd(this);
+        mBannerAd.loadAd(Util.BANNER_POS_ID, new BannerAd.BannerLoadListener() {
+            @Override
+            public void onBannerAdLoadSuccess() {
+                //showBtn.setEnabled(true);
+                mBannerAd.showAd(ads, mBannerInteractionListener);
+            }
+
+            @Override
+            public void onAdLoadFailed(int errorCode, String errorMsg) {
+                Log.e(TAG, "errorCode " + errorCode + " errorMsg " + errorMsg);
+            }
+        });
+    }
+    private BannerAd.BannerInteractionListener mBannerInteractionListener = new BannerAd.BannerInteractionListener() {
+        @Override
+        public void onAdClick() {
+            Log.d(TAG, "onAdClick");
+        }
+
+        @Override
+        public void onAdShow() {
+            Log.d(TAG, "onAdShow");
+        }
+
+        @Override
+        public void onAdDismiss() {
+            Log.d(TAG, "onAdDismiss");
+        }
+
+        @Override
+        public void onRenderSuccess() {
+            Log.d(TAG, "onRenderSuccess");
+        }
+
+        @Override
+        public void onRenderFail(int code, String msg) {
+            Log.e(TAG, "onRenderFail errorCode " + code + " errorMsg " + msg);
+        }
+    };
 //    public GoogleApiClient getApiClient(){
 //        return mHelper.getApiClient();
 //    }

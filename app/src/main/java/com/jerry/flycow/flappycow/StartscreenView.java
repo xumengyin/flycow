@@ -6,14 +6,18 @@
  */
 package com.jerry.flycow.flappycow;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.support.annotation.Nullable;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.jerry.flycow.R;
+
 
 public class StartscreenView extends View{
     
@@ -55,9 +59,14 @@ public class StartscreenView extends View{
     private boolean online;
     private MainActivity mainActivity;
 
-    public StartscreenView(MainActivity context) {
-        super(context);
-        this.mainActivity = context;
+//    public StartscreenView(Context context, @Nullable AttributeSet attrs)
+//    {
+//        super(context, attrs);
+//    }
+
+    public StartscreenView(Context context, @Nullable AttributeSet attrs) {
+        super(context,attrs);
+        this.mainActivity = (MainActivity) context;
         if(splash == null) {
             splash = Util.getBitmapAlpha8(mainActivity, R.drawable.splash);
         }

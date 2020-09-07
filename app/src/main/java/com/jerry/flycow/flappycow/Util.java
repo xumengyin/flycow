@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 public class Util {
+public static final String BANNER_POS_ID = "802e356f1726f9ff39c69308bfd6f06a";
+    public static final String APP_ID = "2882303761517518052";
 private static final int DEFAULT_DENSITY = 1024;
     
     public static Bitmap getScaledBitmapAlpha8(Context context, int id) {

@@ -18,10 +18,10 @@ package com.google.example.games.basegameutils;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 
-import androidx.fragment.app.FragmentActivity;
 
 /**
  * Example base class for games. This implementation takes care of setting up
@@ -40,7 +40,8 @@ import androidx.fragment.app.FragmentActivity;
  *
  * @author Bruno Oliveira (Google)
  */
-public abstract class BaseGameActivity extends FragmentActivity {
+public abstract class BaseGameActivity extends FragmentActivity
+{
 
     // The game helper object. This class is mainly a wrapper around this object.
 
