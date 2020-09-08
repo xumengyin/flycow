@@ -33,7 +33,7 @@ public class Game extends BaseGameActivity
     /** Will play things like mooing */
     public static SoundPool soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
     
-    private static final int GAMES_PER_AD = 3;
+    private static final int GAMES_PER_AD = 2;
     /** Counts number of played games */
     private static int gameOverCounter = 1;
    // private InterstitialAd interstitial;
@@ -126,12 +126,14 @@ public class Game extends BaseGameActivity
             public void onAdClosed()
             {
                 Log.d(TAG, "onAdClosed: ");
+                handler.sendMessage(Message.obtain(handler, MyHandler.GAME_OVER_DIALOG));
             }
 
             @Override
             public void onRenderFail(int i, String s)
             {
                 Log.d(TAG, "onRenderFail: ");
+                handler.sendMessage(Message.obtain(handler, MyHandler.GAME_OVER_DIALOG));
             }
         });
     }
@@ -226,11 +228,11 @@ public class Game extends BaseGameActivity
      * Because it needs an UI thread.
      */
     public void gameOver(){
-//        if(gameOverCounter % GAMES_PER_AD == 1) {
+       if(gameOverCounter % GAMES_PER_AD == 0) {
             handler.sendMessage(Message.obtain(handler, MyHandler.SHOW_AD));
-//        } else {
-//            handler.sendMessage(Message.obtain(handler, MyHandler.GAME_OVER_DIALOG));
-//        }
+        } else {
+            handler.sendMessage(Message.obtain(handler, MyHandler.GAME_OVER_DIALOG));
+        }
         
     }
     
