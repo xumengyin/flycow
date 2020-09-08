@@ -46,6 +46,15 @@ public class MainActivity extends BaseGameActivity
         fetchAds();
     }
 
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        if (mBannerAd != null) {
+            mBannerAd.destroy();
+        }
+    }
+
     private void fetchAds()
     {
         if (mBannerAd != null) {

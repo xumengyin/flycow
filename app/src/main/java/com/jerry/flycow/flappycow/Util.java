@@ -5,7 +5,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 public class Util {
+//public static final String BANNER_POS_ID = "5439248993caadfd87e1f6b6708bf2a6";
+//public static final String SPLASH_ID = "6abdff0800b2ff7d548e7c643ad05588";
+//public static final String FALI_ADS_ID = "14c4705d491efd713172486f84f648ca";
+//    public static final String APP_ID = "2882303761518653362";
+    //测试id
 public static final String BANNER_POS_ID = "802e356f1726f9ff39c69308bfd6f06a";
+public static final String SPLASH_ID = "6abdff0800b2ff7d548e7c643ad05588";
+public static final String FALI_ADS_ID = "67b05e7cc9533510d4b8d9d4d78d0ae9";
     public static final String APP_ID = "2882303761517518052";
 private static final int DEFAULT_DENSITY = 1024;
     

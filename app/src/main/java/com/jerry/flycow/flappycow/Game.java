@@ -14,13 +14,16 @@ import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.example.games.basegameutils.BaseGameActivity;
 import com.jerry.flycow.R;
+import com.miui.zeus.mimo.sdk.InterstitialAd;
 
 public class Game extends BaseGameActivity
 {
+    private static final String TAG = "xuxu";
     /** Name of the SharedPreference that saves the medals */
     public static final String coin_save = "coin_save";
     
@@ -34,7 +37,9 @@ public class Game extends BaseGameActivity
     /** Counts number of played games */
     private static int gameOverCounter = 1;
    // private InterstitialAd interstitial;
-    
+
+    public InterstitialAd mInterstitialAd;
+    public boolean loadAds=false;
     /**
      * Will play songs like:
      * nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan
@@ -84,11 +89,76 @@ public class Game extends BaseGameActivity
         setContentView(view);
         initMusicPlayer();
         loadCoins();
+        ads();
 //        if(gameOverCounter % GAMES_PER_AD == 0) {
 //            setupAd();
 //        }
     }
-    
+
+    private void destroyAds()
+    {
+        if (mInterstitialAd!=null)
+        {
+            mInterstitialAd.destroy();
+        }
+    }
+    private void showAds()
+    {
+        if (mInterstitialAd==null)
+        {
+            return;
+        }
+        mInterstitialAd.show(new InterstitialAd.InterstitialAdInteractionListener()
+        {
+            @Override
+            public void onAdClick()
+            {
+                Log.d(TAG, "onAdClick: ");
+            }
+
+            @Override
+            public void onAdShow()
+            {
+                Log.d(TAG, "onAdShow: ");
+            }
+
+            @Override
+            public void onAdClosed()
+            {
+                Log.d(TAG, "onAdClosed: ");
+            }
+
+            @Override
+            public void onRenderFail(int i, String s)
+            {
+                Log.d(TAG, "onRenderFail: ");
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        destroyAds();
+    }
+
+    private void ads()
+    {
+        destroyAds();
+        mInterstitialAd = new InterstitialAd(this); // this需传Activity
+        mInterstitialAd.loadAd(Util.FALI_ADS_ID, new InterstitialAd.InterstitialAdLoadListener() {
+            @Override
+            public void onAdLoadSuccess() {
+                loadAds=true;
+            }
+            @Override
+            public void onAdLoadFailed(int errorCode, String errorMsg) {
+                loadAds=false;
+                Log.e(TAG, "onAdLoadFailed errorMsg=" + errorMsg);
+            }
+        });
+    }
 
     /**
      * Initializes the player with the nyan cat song
@@ -156,11 +226,11 @@ public class Game extends BaseGameActivity
      * Because it needs an UI thread.
      */
     public void gameOver(){
-        if(gameOverCounter % GAMES_PER_AD == 0) {
+//        if(gameOverCounter % GAMES_PER_AD == 1) {
             handler.sendMessage(Message.obtain(handler, MyHandler.SHOW_AD));
-        } else {
-            handler.sendMessage(Message.obtain(handler, MyHandler.GAME_OVER_DIALOG));
-        }
+//        } else {
+//            handler.sendMessage(Message.obtain(handler, MyHandler.GAME_OVER_DIALOG));
+//        }
         
     }
     
@@ -261,6 +331,15 @@ public class Game extends BaseGameActivity
 //                    showGameOverDialog();
 //                }
 //            }
+
+            if(game.loadAds)
+            {
+                game.showAds();
+                showGameOverDialog();
+            }else
+            {
+                showGameOverDialog();
+            }
         }
         
         private void showGameOverDialog() {
